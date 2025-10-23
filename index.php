@@ -5,7 +5,7 @@
         <title>TeachMe</title>
         <?php wp_head() ?>
     </head>
-    <body class="<?php ?>">
+    <body <?php echo body_class("table")?>>
         <?php
             echo do_shortcode("[table id=1 /]");
         ?>

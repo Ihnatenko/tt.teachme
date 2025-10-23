@@ -1,5 +1,5 @@
 {
-  "name": "TeachMe",
+  "name": "teach_me",
   "version": "1.0.0",
   "main": "gulpfile.js",
   "devDependencies": {

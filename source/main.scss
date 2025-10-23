@@ -1,0 +1,105 @@
+$body_padding: 20px;
+$body_cell_padding: 20px;
+
+.table {
+    table {
+        border-collapse: collapse;
+        font-family: Arial, Helvetica, sans-serif;
+
+        thead {
+            th,  td {
+                background-color: white;
+                font-weight: 600;
+                color: rgb(0, 0, 161);
+                border: none;
+                padding: $body_padding;
+            }
+        }
+
+        tbody {
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(0, 0, 161, 0.2);
+            overflow: hidden;
+
+            td {
+                padding: $body_padding;
+
+                &:first-child{
+                    background-color: rgba(0, 0, 161, 0.2);
+                    color: rgb(0, 0, 161);
+                    border: none;
+                    padding-left: $body_padding + $body_cell_padding;
+                    font-weight: 600;
+                }
+
+                &:last-child{
+                    padding-right: $body_padding + $body_cell_padding;
+                }
+
+                &:nth-child(2) {
+                    padding-left: $body_padding + $body_cell_padding;
+                }
+            }
+
+            tr {
+
+                td:not(:first-child):not(:nth-child(2)) {
+                    position: relative;
+
+                    &::before {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 1px;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        background-color: green;
+                    }
+                }
+
+                &:first-child td:not(:first-child):not(:nth-child(2)) {
+                    &::before {
+                        height: calc(100% - 30px);
+                        top: 30px;
+                    }
+                }
+
+                &:last-child td:not(:first-child):not(:nth-child(2)) {
+                    &::before {
+                        height: calc(100% - 30px);
+                    }
+                }
+
+                &:first-child td {
+                    padding-top: $body_padding + $body_cell_padding;
+
+                    &:first-child{
+                        border-top-left-radius: 15px;
+                    }
+    
+                    &:last-child{
+                        border-top-right-radius: 15px;
+                    }
+                }
+
+
+                &:last-child td {
+                    padding-bottom: 40px;
+
+                    &:last-child{
+                        border-bottom-right-radius: 15px;
+                    }
+        
+                    &:first-child{
+                        border-bottom-left-radius: 15px;
+                    }
+                }
+
+                &:not(:last-child) td:not(:first-child) {
+                    border-bottom: 1px solid green;
+                }
+            }
+        }
+    }
+}
