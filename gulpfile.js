@@ -26,24 +26,11 @@ function styles() {
 }
 
 
-function scripts() {
-    return gulp.src(paths.scripts.src, { sourcemaps: true })
-        .pipe(concat("main.js"))
-        .pipe(gulp.dest(paths.scripts.dest));
-}
-
-
 function watch() {
-    gulp.watch(paths.scripts.src, scripts);
     gulp.watch(paths.styles.src, styles);
 }
 
-
-var build = gulp.series(gulp.parallel(styles, scripts));
-
 exports.styles = styles;
-exports.scripts = scripts;
 exports.watch = watch;
-exports.build = build;
 
 exports.default = watch;
