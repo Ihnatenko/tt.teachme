@@ -6,8 +6,11 @@
         <?php wp_head() ?>
     </head>
     <body <?php echo body_class()?>>
-        <a href="/plugin-table">Таблиця створена задопомогою плагіну</a>
-        <a href="/native-table">Таблиця створена задопомогою гутенбергу</a>
+        <div class="table">
+            <?php
+                the_content();
+            ?>
+        </div>
         <?php wp_head() ?>
     </body>
 </html>

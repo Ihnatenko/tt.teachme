@@ -1,3 +1,5 @@
+<?php /* Template name: Native table */ ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,8 +8,12 @@
         <?php wp_head() ?>
     </head>
     <body <?php echo body_class()?>>
-        <a href="/plugin-table">Таблиця створена задопомогою плагіну</a>
-        <a href="/native-table">Таблиця створена задопомогою гутенбергу</a>
+        <h1>Нативна таблиця</h1>
+        <div class="table">
+            <?php
+                the_content();
+            ?>
+        </div>
         <?php wp_head() ?>
     </body>
 </html>
