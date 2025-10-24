@@ -1,34 +1,25 @@
 @use "sass:color";
 
-$body_padding: 20px;
-$body_cell_padding: 20px;
 
-$side_background: #e5ebff;
-$side_color: #0b1990;
-$header_color: #0b1990;
-
-$side_border_color: #aab2d3;
-$border_color: #e6e9ee;
-
-$border-radius: 20px;
-
-@mixin thead() {
-    background-color: white;
-    font-weight: 600;
-    color: $header_color;
-    border: none;
-
-    padding: $body_padding;
-
-    &:first-child {
-        position: sticky;
-        left: 15px;
-        z-index: 2;
-        background-color: transparent;
-    }
-}
 
 .table.table {
+    --body-padding: 20px;
+    --body-cell-padding: 20px;
+
+    @media(max-width: 720px) {
+        --body-padding: 10px;
+        --body-cell-padding: 10px;
+    }
+
+    $side_background: #e5ebff;
+    $side_color: #0b1990;
+    $header_color: #0b1990;
+
+    $side_border_color: #aab2d3;
+    $border_color: #e6e9ee;
+
+    $border-radius: 20px;
+
     padding: 0 30px 30px;
     overflow: auto;
     scrollbar-width: thin;
@@ -45,12 +36,27 @@ $border-radius: 20px;
         margin: 30px auto;
         width: auto;
 
+        @media(max-width: 720px) {
+          font-size: 12px;
+        }
+
         tbody {
             overflow: hidden;
 
             tr:first-child {
                 td {
-                    @include thead();
+                    background-color: white;
+                    font-weight: 600;
+                    color: $header_color;
+                    border: none;
+                    padding: var(--body-padding);
+
+                    &:first-child {
+                        position: sticky;
+                        left: 15px;
+                        z-index: 2;
+                        background-color: transparent;
+                    }
                 }
             }
 
@@ -60,7 +66,7 @@ $border-radius: 20px;
             }
 
             td {
-                padding: $body_padding;
+                padding: var(--body-padding);
                 border: none;
                 word-break: normal;
 
@@ -68,7 +74,7 @@ $border-radius: 20px;
                     background-color: $side_background;
                     color: $side_color;
                     border: none;
-                    padding-left: $body_cell_padding;
+                    padding-left: var(--body-cell-padding);
                     font-weight: 600;
                     position: sticky;
                     left: -30px;
@@ -76,11 +82,11 @@ $border-radius: 20px;
                 }
 
                 &:last-child{
-                    padding-right: $body_padding + $body_cell_padding;
+                    padding-right: calc(var(--body-padding) + var(--body-cell-padding));
                 }
 
                 &:nth-child(2) {
-                    padding-left: $body_padding + $body_cell_padding;
+                    padding-left: calc(var(--body-padding) + var(--body-cell-padding));
                 }
             }
 
@@ -121,7 +127,7 @@ $border-radius: 20px;
                 }
 
                 &:nth-child(2) td {
-                    padding-top: $body_padding + $body_cell_padding;
+                    padding-top: calc(var(--body-padding) + var(--body-cell-padding));
 
                     &:first-child{
                         border-top-left-radius: var(--radius);
@@ -155,9 +161,9 @@ $border-radius: 20px;
                         display: block;
                         position: absolute;
                         height: 1px;
-                        width: calc(100% - #{$body_cell_padding * 2});
+                        width: calc(100% - var(--body-cell-padding) * 2);
                         bottom: 0;
-                        left: $body_cell_padding;
+                        left: var(--body-cell-padding);
                         background-color: $side_border_color;
                     }
                 }
