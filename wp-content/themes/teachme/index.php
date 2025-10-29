@@ -9,9 +9,48 @@
     <body <?php echo body_class("main")?>>
         <h1>Головна сторінка</h1>
         <p>
-            Цей приклад має три таблиці. <br>
+            Цей приклад має чотири таблиці. <br>
             Вони простилізовані однаково, але створені порізному
         </p>
+
+        <h2>Таблиця, добавлена за допомогою кастомного редактору таблиць</h2>
+        <div class="table">
+            <table>
+                <tbody>
+                    <?php
+                        $table_rows = json_decode(get_option('tt_options')["tt_table"]);
+                        if ( ! empty( $table_rows ) && is_array( $table_rows ) ) {
+                            foreach ( $table_rows as $row_key => $row ) {
+                                if ( empty($row) ) { continue; }
+
+                                if ( $row_key === count($table_rows) - 1 ) {
+                                    continue;
+                                }
+
+                                if ( $row_key === 0 ) {
+                                    echo '<tr class="table-header">';
+                                    foreach ( $row as $cell ) {
+                                        echo '<td class="table-header-cell">' . esc_html( $cell ) . '</td>';
+                                    }
+                                    echo '</tr>';
+                                    continue;
+                                }
+
+                                echo '<tr class="table-row">';
+                                foreach ( $row as $cell_key => $cell ) {
+                                    if ( $row_key === 0 ) {
+                                        echo '<td class="table-row-cell table-row-cell--header">' . esc_html( $cell ) . '</td>';
+                                        continue;
+                                    }
+                                    echo '<td class="table-row-cell">' . esc_html( $cell ) . '</td>';
+                                }
+                                echo '</tr>';
+                            }
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
         <h2>Таблиця, добавлена за допомогою Carbon Fields</h2>
         <div class="table">
