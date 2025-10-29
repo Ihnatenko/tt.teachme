@@ -3,15 +3,17 @@
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
+include_once( get_template_directory() . '/include/optionTable.php' );
+
 add_action( 'wp_enqueue_scripts', 'put_scripts' );
 function put_scripts(){
-  $style_hash = hash_file('md5', get_template_directory_uri() . '/style.css');
-  $maincss_hash = hash_file('md5', get_template_directory_uri() . '/public/main.css');
-  $mainjs_hash = hash_file('md5', get_template_directory_uri() . '/public/main.js');
+  $style_hash = hash_file('md5', get_template_directory() . '/style.css');
+  $maincss_hash = hash_file('md5', get_template_directory() . '/public/main.css');
+  $mainjs_hash = hash_file('md5', get_template_directory() . '/public/main.js');
 
-  wp_enqueue_style( "style", get_template_directory_uri() . "/style.css?v=" . $style_hash);
-  wp_enqueue_style( "main", get_template_directory_uri() . "/public/main.css?v=" . $maincss_hash);
-  wp_enqueue_script( "main", get_template_directory_uri() . "/public/main.js?v=" . $mainjs_hash);
+  wp_enqueue_style( "style", get_template_directory_uri() . "/style.css", array(), $style_hash);
+  wp_enqueue_style( "main", get_template_directory_uri() . "/public/main.css", array(), $maincss_hash);
+  wp_enqueue_script( "main", get_template_directory_uri() . "/public/main.js", array(), $mainjs_hash);
 }
 
 add_filter('tablepress_use_default_css', '__return_false');
@@ -35,3 +37,16 @@ Container::make( 'post_meta', 'Таблиця' )
           ))
     ));
   }
+
+add_action( 'admin_enqueue_scripts', 'tt_enqueue_option_table_script' );
+function tt_enqueue_option_table_script( $hook ){
+  if ( 'toplevel_page_tt_options' !== $hook ) return;
+
+  wp_register_style( 'handsontable-css', 'https://cdn.jsdelivr.net/npm/handsontable@11.1.0/dist/handsontable.min.css' );
+  wp_register_script( 'handsontable', 'https://cdn.jsdelivr.net/npm/handsontable@11.1.0/dist/handsontable.min.js' );
+  wp_enqueue_style( 'handsontable-css' );
+  wp_enqueue_script( 'handsontable' );
+
+  $admin_hash = hash_file('md5', get_template_directory() . '/public/adminTable.js');
+  wp_enqueue_script( 'tt-admin-table', get_template_directory_uri() . '/public/adminTable.js', array('jquery','handsontable'), $admin_hash );
+}
